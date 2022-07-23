@@ -1,23 +1,32 @@
 import type { DecoratorFunction } from "@storybook/addons";
 import { useEffect, useGlobals } from "@storybook/addons";
-import { DEFAULT_VALUES } from "./components/PanelContent";
+import { DEFAULT_VALUES } from "./components/defaults";
 
 export const withGlobals: DecoratorFunction = (StoryFn, context) => {
-  const [{ columnsActive, columns, gap, maxWidth }] = useGlobals();
+  const [{ columnsActive, columns, gap, maxWidth, breakpoint }] = useGlobals();
 
   useEffect(() => {
-    displayToolState(`#root`, { columnsActive, columns, gap, maxWidth });
-  }, [columnsActive, columns, gap, maxWidth]);
+    displayColumnState(`#root`, {
+      columnsActive,
+      columns,
+      gap,
+      maxWidth,
+      breakpoint,
+    });
+  }, [columnsActive, columns, gap, maxWidth, breakpoint]);
 
   return StoryFn();
 };
 
-function displayToolState(selector: string, state: any) {
+function displayColumnState(selector: string, state: any) {
   const rootElement = document.querySelector(selector);
   let columnsElement = rootElement.querySelector("aside");
   // const previewWidth = rootElement.getBoundingClientRect().width;
   const column = document.createElement("div");
-  const { columnsActive, columns, gap, maxWidth } = state;
+  const { columnsActive, columns, gap, maxWidth, breakpoint } = state;
+  const breakpointsArray = DEFAULT_VALUES.map(({ breakpoint }) => breakpoint);
+
+  console.log(breakpointsArray);
 
   if (!columnsElement) {
     columnsElement = document.createElement("aside");
@@ -29,9 +38,9 @@ function displayToolState(selector: string, state: any) {
     display: ${columnsActive ? "flex" : "none"};
     position: absolute;
     inset: 0;
-    max-width: ${maxWidth ? maxWidth : DEFAULT_VALUES.maxWidth}px;
+    max-width: ${maxWidth ? maxWidth : "none"}px;
     margin: 0 auto;
-    gap: ${gap ? gap : DEFAULT_VALUES.gap}px;
+    gap: ${gap ? gap : DEFAULT_VALUES[0].gap}px;
     opacity: 0.3;
   `;
 
@@ -41,7 +50,7 @@ function displayToolState(selector: string, state: any) {
   `;
 
   rootElement.appendChild(columnsElement);
-  for (let i = 0; i < (columns ? columns : DEFAULT_VALUES.columns); i++) {
+  for (let i = 0; i < (columns ? columns : DEFAULT_VALUES[0].columns); i++) {
     columnsElement.appendChild(column.cloneNode(true));
   }
 }

@@ -1,31 +1,20 @@
 import React, { useCallback } from "react";
 import { useGlobals } from "@storybook/api";
-import { styled } from "@storybook/theming";
-import { Button, Form } from "@storybook/components";
-
-export const DEFAULT_VALUES = {
-  columns: 12,
-  gap: 16,
-  maxWidth: 1224,
-};
+import { BooleanControl, Form } from "@storybook/components";
+import { ColumnHeaders, ColumnsToggle, Container, Input } from "./ui";
+import { DEFAULT_VALUES } from "./defaults";
 
 export const PanelContent: React.FC = () => {
-  const [{ columnsActive, columns, gap, maxWidth }, updateGlobals] =
+  const [{ columnsActive, columns, gap, maxWidth, breakpoint }, updateGlobals] =
     useGlobals();
 
   const toggleColumns = useCallback(
-    () =>
-      updateGlobals({
-        columnsActive: columnsActive ? undefined : true,
-      }),
+    () => updateGlobals({ columnsActive: !columnsActive }),
     [columnsActive]
   );
 
   const setColumns = useCallback(
-    (cols: string) =>
-      updateGlobals({
-        columns: cols,
-      }),
+    (cols: string) => updateGlobals({ columns: cols }),
     [columns]
   );
 
@@ -39,30 +28,36 @@ export const PanelContent: React.FC = () => {
     [maxWidth]
   );
 
+  const setBreakpoint = useCallback(
+    (breakpoint: string) => updateGlobals({ breakpoint: breakpoint }),
+    [breakpoint]
+  );
+
   return (
-    <div style={{ padding: "16px" }}>
-      <Button primary onClick={toggleColumns}>
-        toggle columns
-      </Button>
-      <br />
-      <Form.Input
-        defaultValue={DEFAULT_VALUES.columns}
-        onChange={(e) => setColumns((e.target as HTMLInputElement).value)}
-        size="100%"
-        type="number"
-      />
-      <Form.Input
-        defaultValue={DEFAULT_VALUES.gap}
-        onChange={(e) => setGap((e.target as HTMLInputElement).value)}
-        size="100%"
-        type="number"
-      />
-      <Form.Input
-        defaultValue={DEFAULT_VALUES.maxWidth}
-        onChange={(e) => setMaxWidth((e.target as HTMLInputElement).value)}
-        size="100%"
-        type="number"
-      />
-    </div>
+    <Container padding="32px">
+      <ColumnsToggle onChange={toggleColumns} />
+      <ColumnHeaders />
+      {DEFAULT_VALUES.map((breakpoint, i) => (
+        <Container display="flex" gap="16px" padding="4px 0">
+          <Input
+            flex="0.5"
+            defaultValue={DEFAULT_VALUES[i].breakpoint}
+            onChange={(e) => setBreakpoint(e.target.value)}
+          />
+          <Input
+            defaultValue={DEFAULT_VALUES[i].columns}
+            onChange={(e) => setColumns(e.target.value)}
+          />
+          <Input
+            defaultValue={DEFAULT_VALUES[i].gap}
+            onChange={(e) => setGap(e.target.value)}
+          />
+          <Input
+            defaultValue={DEFAULT_VALUES[i].maxWidth}
+            onChange={(e) => setMaxWidth(e.target.value)}
+          />
+        </Container>
+      ))}
+    </Container>
   );
 };
