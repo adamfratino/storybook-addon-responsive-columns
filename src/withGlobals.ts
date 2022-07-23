@@ -1,44 +1,47 @@
 import type { DecoratorFunction } from "@storybook/addons";
 import { useEffect, useGlobals } from "@storybook/addons";
+import { DEFAULT_VALUES } from "./components/PanelContent";
 
 export const withGlobals: DecoratorFunction = (StoryFn, context) => {
-  const [{ myAddon }] = useGlobals();
-  // Is the addon being used in the docs panel
-  const isInDocs = context.viewMode === "docs";
+  const [{ columnsActive, columns, gap, maxWidth }] = useGlobals();
 
   useEffect(() => {
-    // Execute your side effect here
-    // For example, to manipulate the contents of the preview
-    const selectorId = isInDocs
-      ? `#anchor--${context.id} .docs-story`
-      : `#root`;
-
-    displayToolState(selectorId, {
-      myAddon,
-      isInDocs,
-    });
-  }, [myAddon]);
+    displayToolState(`#root`, { columnsActive, columns, gap, maxWidth });
+  }, [columnsActive, columns, gap, maxWidth]);
 
   return StoryFn();
 };
 
 function displayToolState(selector: string, state: any) {
   const rootElement = document.querySelector(selector);
-  let preElement = rootElement.querySelector("pre");
+  let columnsElement = rootElement.querySelector("aside");
+  // const previewWidth = rootElement.getBoundingClientRect().width;
+  const column = document.createElement("div");
+  const { columnsActive, columns, gap, maxWidth } = state;
 
-  if (!preElement) {
-    preElement = document.createElement("pre");
-    preElement.style.setProperty("margin-top", "2rem");
-    preElement.style.setProperty("padding", "1rem");
-    preElement.style.setProperty("background-color", "#eee");
-    preElement.style.setProperty("border-radius", "3px");
-    preElement.style.setProperty("max-width", "600px");
-    rootElement.appendChild(preElement);
+  if (!columnsElement) {
+    columnsElement = document.createElement("aside");
+  } else {
+    columnsElement.replaceChildren();
   }
 
-  preElement.innerText = `This snippet is injected by the withGlobals decorator.
-It updates as the user interacts with the ⚡ tool in the toolbar above.
+  columnsElement.style.cssText = `
+    display: ${columnsActive ? "flex" : "none"};
+    position: absolute;
+    inset: 0;
+    max-width: ${maxWidth ? maxWidth : DEFAULT_VALUES.maxWidth}px;
+    margin: 0 auto;
+    gap: ${gap ? gap : DEFAULT_VALUES.gap}px;
+    opacity: 0.3;
+  `;
 
-${JSON.stringify(state, null, 2)}
-`;
+  column.style.cssText = `
+    flex: 1;
+    background: tomato;
+  `;
+
+  rootElement.appendChild(columnsElement);
+  for (let i = 0; i < (columns ? columns : DEFAULT_VALUES.columns); i++) {
+    columnsElement.appendChild(column.cloneNode(true));
+  }
 }

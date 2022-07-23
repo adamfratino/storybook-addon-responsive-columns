@@ -1,76 +1,68 @@
-import React, { Fragment } from "react";
-import { styled, themes, convert } from "@storybook/theming";
-import { TabsState, Placeholder, Button } from "@storybook/components";
-import { List } from "./List";
+import React, { useCallback } from "react";
+import { useGlobals } from "@storybook/api";
+import { styled } from "@storybook/theming";
+import { Button, Form } from "@storybook/components";
 
-export const RequestDataButton = styled(Button)({
-  marginTop: "1rem",
-});
-
-type Results = {
-  danger: any[];
-  warning: any[];
+export const DEFAULT_VALUES = {
+  columns: 12,
+  gap: 16,
+  maxWidth: 1224,
 };
 
-interface PanelContentProps {
-  results: Results;
-  fetchData: () => void;
-  clearData: () => void;
-}
+export const PanelContent: React.FC = () => {
+  const [{ columnsActive, columns, gap, maxWidth }, updateGlobals] =
+    useGlobals();
 
-/**
- * Checkout https://github.com/storybookjs/storybook/blob/next/addons/jest/src/components/Panel.tsx
- * for a real world example
- */
-export const PanelContent: React.FC<PanelContentProps> = ({
-  results,
-  fetchData,
-  clearData,
-}) => (
-  <TabsState
-    initial="overview"
-    backgroundColor={convert(themes.normal).background.hoverable}
-  >
-    <div
-      id="overview"
-      title="Overview"
-      color={convert(themes.normal).color.positive}
-    >
-      <Placeholder>
-        <Fragment>
-          Addons can gather details about how a story is rendered. This is panel
-          uses a tab pattern. Click the button below to fetch data for the other
-          two tabs.
-        </Fragment>
-        <Fragment>
-          <RequestDataButton
-            secondary
-            small
-            onClick={fetchData}
-            style={{ marginRight: 16 }}
-          >
-            Request data
-          </RequestDataButton>
+  const toggleColumns = useCallback(
+    () =>
+      updateGlobals({
+        columnsActive: columnsActive ? undefined : true,
+      }),
+    [columnsActive]
+  );
 
-          <RequestDataButton outline small onClick={clearData}>
-            Clear data
-          </RequestDataButton>
-        </Fragment>
-      </Placeholder>
+  const setColumns = useCallback(
+    (cols: string) =>
+      updateGlobals({
+        columns: cols,
+      }),
+    [columns]
+  );
+
+  const setGap = useCallback(
+    (gap: string) => updateGlobals({ gap: gap }),
+    [gap]
+  );
+
+  const setMaxWidth = useCallback(
+    (maxWidth: string) => updateGlobals({ maxWidth: maxWidth }),
+    [maxWidth]
+  );
+
+  return (
+    <div style={{ padding: "16px" }}>
+      <Button primary onClick={toggleColumns}>
+        toggle columns
+      </Button>
+      <br />
+      <Form.Input
+        defaultValue={DEFAULT_VALUES.columns}
+        onChange={(e) => setColumns((e.target as HTMLInputElement).value)}
+        size="100%"
+        type="number"
+      />
+      <Form.Input
+        defaultValue={DEFAULT_VALUES.gap}
+        onChange={(e) => setGap((e.target as HTMLInputElement).value)}
+        size="100%"
+        type="number"
+      />
+      <Form.Input
+        defaultValue={DEFAULT_VALUES.maxWidth}
+        onChange={(e) => setMaxWidth((e.target as HTMLInputElement).value)}
+        size="100%"
+        type="number"
+      />
     </div>
-    <div
-      id="danger"
-      title={`${results.danger.length} Danger`}
-      color={convert(themes.normal).color.negative}
-    >
-      <List items={results.danger} />
-    </div>
-    <div
-      id="warning"
-      title={`${results.warning.length} Warning`}
-      color={convert(themes.normal).color.warning}
-    >
-      <List items={results.warning} />
-    </div>
-  </TabsState>
-);
+  );
+};
