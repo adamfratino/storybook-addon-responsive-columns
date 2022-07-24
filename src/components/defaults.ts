@@ -3,7 +3,6 @@ export const DEFAULT_VALUES = [
     breakpoint: 0,
     columns: 4,
     gap: 4,
-    maxWidth: "none",
   },
   {
     breakpoint: 768,

@@ -4,7 +4,8 @@ import { styled } from "@storybook/theming";
 import { useGlobals } from "@storybook/api";
 
 const ColumnsToggle: React.FC<{ onChange?: () => void }> = ({ onChange }) => {
-  const [{ columnsActive }] = useGlobals();
+  const [globals] = useGlobals();
+  const { columnsActive } = globals;
 
   return (
     <StyledContainer>

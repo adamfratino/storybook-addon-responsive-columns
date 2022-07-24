@@ -1,6 +1,6 @@
-export const ADDON_ID = "storybook/my-addon";
+export const ADDON_ID = "storybook/responsive-columns";
 export const PANEL_ID = `${ADDON_ID}/panel`;
-export const PARAM_KEY = `myAddonParameter`;
+export const PARAM_KEY = `responsiveColumnsParameter`;
 
 export const EVENTS = {
   RESULT: `${ADDON_ID}/result`,
