@@ -4,7 +4,7 @@ import { useAddonState } from "@storybook/client-api";
 import { ADDON_ID } from "./constants";
 import { defaults } from "./defaults";
 
-export const withGlobals: DecoratorFunction = (StoryFn, context) => {
+export const withColumns: DecoratorFunction = (StoryFn, context) => {
   const [{ columnsActive }] = useGlobals();
   const [currentBreakpoints] = useAddonState(ADDON_ID);
   // const [columnsActive] = useAddonState(ADDON_ID)
@@ -58,6 +58,7 @@ function displayColumnState(state: any) {
         margin: 0 auto;
         gap: ${currentBreakpoints[activeIndex].gap}px;
         opacity: 0.3;
+        pointer-events: none;
       `;
 
       column.style.cssText = `
