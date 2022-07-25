@@ -5,19 +5,15 @@ import { defaults } from "../defaults";
 import { ADDON_ID } from "../constants";
 
 export const PanelContent: React.FC = () => {
-  const [
-    { columnsActive = false, breakpoints = defaults.breakpoints },
-    updateGlobals,
-  ] = useGlobals();
-  const [currentBreakpoints, setCurrentBreakpoints] = useAddonState(
-    ADDON_ID,
-    breakpoints
-  );
+  const [{ columnsActive = false }, updateGlobals] = useGlobals();
+  const [currentBreakpoints, setCurrentBreakpoints] = useAddonState(ADDON_ID, [
+    ...defaults.breakpoints,
+  ]);
 
   useEffect(() => {
-    setCurrentBreakpoints(breakpoints);
-    console.table("currentBreakpoints", currentBreakpoints);
-    console.table("breakpoints", breakpoints);
+    setCurrentBreakpoints(defaults.breakpoints);
+
+    updateGlobals({ breakpoints: currentBreakpoints });
   }, [columnsActive]);
 
   const toggleColumns = useCallback(
@@ -27,15 +23,17 @@ export const PanelContent: React.FC = () => {
 
   const setBreakpointValue = useCallback(
     (property: any, value: string, i: number) => {
-      let newBreakpoints = [...breakpoints];
+      let newBreakpoints = [...currentBreakpoints];
 
-      newBreakpoints[i][property] = !(property === "maxWidth" && +value <= 0)
+      (newBreakpoints[i] as any)[property] = !(
+        property === "maxWidth" && +value <= 0
+      )
         ? +value
         : undefined;
 
       setCurrentBreakpoints(newBreakpoints);
     },
-    [breakpoints]
+    [currentBreakpoints]
   );
 
   return (
