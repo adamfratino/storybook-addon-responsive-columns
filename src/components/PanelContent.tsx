@@ -1,10 +1,24 @@
-import React, { useCallback } from "react";
-import { useGlobals } from "@storybook/api";
+import React, { useCallback, useEffect } from "react";
+import { useGlobals, useAddonState } from "@storybook/api";
 import { ColumnHeaders, ColumnsToggle, Container, Input } from "./ui";
-import { DEFAULT_VALUES } from "./defaults";
+import { defaults } from "../defaults";
+import { ADDON_ID } from "../constants";
 
 export const PanelContent: React.FC = () => {
-  const [{ columnsActive, breakpoints }, updateGlobals] = useGlobals();
+  const [
+    { columnsActive = false, breakpoints = defaults.breakpoints },
+    updateGlobals,
+  ] = useGlobals();
+  const [currentBreakpoints, setCurrentBreakpoints] = useAddonState(
+    ADDON_ID,
+    breakpoints
+  );
+
+  useEffect(() => {
+    setCurrentBreakpoints(breakpoints);
+    console.table("currentBreakpoints", currentBreakpoints);
+    console.table("breakpoints", breakpoints);
+  }, [columnsActive]);
 
   const toggleColumns = useCallback(
     () => updateGlobals({ columnsActive: !columnsActive }),
@@ -14,10 +28,12 @@ export const PanelContent: React.FC = () => {
   const setBreakpointValue = useCallback(
     (property: any, value: string, i: number) => {
       let newBreakpoints = [...breakpoints];
+
       newBreakpoints[i][property] = !(property === "maxWidth" && +value <= 0)
         ? +value
         : undefined;
-      updateGlobals({ breakpoints: newBreakpoints });
+
+      setCurrentBreakpoints(newBreakpoints);
     },
     [breakpoints]
   );
@@ -26,7 +42,7 @@ export const PanelContent: React.FC = () => {
     <Container padding="32px">
       <ColumnsToggle onChange={toggleColumns} />
       <ColumnHeaders />
-      {DEFAULT_VALUES.map((breakpoint, i) => (
+      {defaults.breakpoints.map((breakpoint, i) => (
         <Container
           display="flex"
           gap="16px"
@@ -35,21 +51,21 @@ export const PanelContent: React.FC = () => {
         >
           <Input
             flex="0.5"
-            defaultValue={DEFAULT_VALUES[i].breakpoint}
+            defaultValue={defaults.breakpoints[i].breakpoint}
             onChange={(e) =>
               setBreakpointValue("breakpoint", e.target.value, i)
             }
           />
           <Input
-            defaultValue={DEFAULT_VALUES[i].columns}
+            defaultValue={defaults.breakpoints[i].columns}
             onChange={(e) => setBreakpointValue("columns", e.target.value, i)}
           />
           <Input
-            defaultValue={DEFAULT_VALUES[i].gap}
+            defaultValue={defaults.breakpoints[i].gap}
             onChange={(e) => setBreakpointValue("gap", e.target.value, i)}
           />
           <Input
-            defaultValue={DEFAULT_VALUES[i].maxWidth}
+            defaultValue={defaults.breakpoints[i].maxWidth}
             onChange={(e) => setBreakpointValue("maxWidth", e.target.value, i)}
           />
         </Container>

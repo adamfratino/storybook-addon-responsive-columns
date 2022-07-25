@@ -1,26 +1,15 @@
 import type { DecoratorFunction } from "@storybook/addons";
 import { useEffect, useGlobals } from "@storybook/addons";
-import { DEFAULT_VALUES } from "./components/defaults";
+import { useAddonState } from "@storybook/client-api";
+import { ADDON_ID } from "./constants";
+import { defaults } from "./defaults";
 
 export const withGlobals: DecoratorFunction = (StoryFn, context) => {
-  const [{ columnsActive, breakpoints }, updateGlobals] = useGlobals();
+  const [{ columnsActive, breakpoints }] = useGlobals();
+  const [currentBreakpoints] = useAddonState(ADDON_ID);
 
   useEffect(() => {
-    updateGlobals({
-      columnsActive: false,
-      breakpoints: DEFAULT_VALUES,
-    });
-
-    window.addEventListener("resize", () =>
-      displayColumnState({ columnsActive, breakpoints })
-    );
-    return window.removeEventListener("resize", () =>
-      displayColumnState({ columnsActive, breakpoints })
-    );
-  }, []);
-
-  useEffect(() => {
-    displayColumnState({ columnsActive, breakpoints });
+    displayColumnState({ columnsActive, currentBreakpoints });
   }, [columnsActive, breakpoints]);
 
   return StoryFn();
@@ -31,9 +20,10 @@ function displayColumnState(state: any) {
   let columnsElement = rootElement.querySelector("aside");
   const column = document.createElement("div");
   const { columnsActive, breakpoints } = state;
-  const breakpointsArray = DEFAULT_VALUES.map(({ breakpoint }) => breakpoint);
+  const breakpointsArray = defaults.breakpoints.map(
+    ({ breakpoint }) => breakpoint
+  );
   let activeIndex = 0;
-  console.log(breakpoints);
 
   breakpointsArray.every((bp, i) => {
     if (!window.matchMedia(`(min-width: ${bp}px)`).matches) return false;
