@@ -7,6 +7,7 @@ import { defaults } from "./defaults";
 export const withGlobals: DecoratorFunction = (StoryFn, context) => {
   const [{ columnsActive }] = useGlobals();
   const [currentBreakpoints] = useAddonState(ADDON_ID);
+  // const [columnsActive] = useAddonState(ADDON_ID)
 
   useEffect(() => {
     window.addEventListener("resize", () => {

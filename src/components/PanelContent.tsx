@@ -13,13 +13,12 @@ export const PanelContent: React.FC = () => {
   useEffect(() => {
     setCurrentBreakpoints(defaults.breakpoints);
 
-    updateGlobals({ breakpoints: currentBreakpoints });
+    // updateGlobals({ breakpoints: currentBreakpoints });
   }, [columnsActive]);
 
-  const toggleColumns = useCallback(
-    () => updateGlobals({ columnsActive: !columnsActive }),
-    [columnsActive]
-  );
+  const toggleColumns = useCallback(() => {
+    updateGlobals({ columnsActive: columnsActive ? undefined : true });
+  }, [columnsActive]);
 
   const setBreakpointValue = useCallback(
     (property: any, value: string, i: number) => {
