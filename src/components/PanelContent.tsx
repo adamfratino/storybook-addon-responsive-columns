@@ -12,8 +12,6 @@ export const PanelContent: React.FC = () => {
 
   useEffect(() => {
     setCurrentBreakpoints(defaults.breakpoints);
-
-    // updateGlobals({ breakpoints: currentBreakpoints });
   }, [columnsActive]);
 
   const toggleColumns = useCallback(() => {
