@@ -2,13 +2,13 @@ import React, { useCallback, useEffect } from "react";
 import { useAddonState } from "@storybook/api";
 import { ADDON_ID } from "../constants";
 import { defaults } from "../defaults";
-import { ColumnsProps } from "../types";
 import {
   ColorControls,
   ColumnHeaders,
   ColumnsToggle,
   Container,
   Input,
+  OpacityControls,
 } from "./ui";
 
 export const PanelContent: React.FC = () => {
@@ -21,12 +21,23 @@ export const PanelContent: React.FC = () => {
     `${ADDON_ID}_gridColor`,
     defaults.gridColor
   );
+  const [opacity, setOpacity] = useAddonState(
+    `${ADDON_ID}_opacity`,
+    defaults.opacity
+  );
 
   const toggleColumns = useCallback(() => setActive(!active), [active]);
 
   const updateGridColor = useCallback(
     (gridColor) => setGridColor(gridColor),
     [gridColor]
+  );
+
+  const updateOpacity = useCallback(
+    (opacity) => {
+      setOpacity(opacity);
+    },
+    [opacity]
   );
 
   const setBreakpointValue = useCallback(
@@ -44,9 +55,33 @@ export const PanelContent: React.FC = () => {
 
   return (
     <Container padding="32px">
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <ColumnsToggle onChange={toggleColumns} isActive={active} />
-        <ColorControls onChange={(color) => updateGridColor(color)} />
+      <div
+        style={{
+          display: "flex",
+          alignItems: " center",
+          marginBottom: "16px",
+          gap: "32px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flex: 2,
+            marginRight: "auto",
+          }}
+        >
+          <ColumnsToggle onChange={toggleColumns} isActive={active} />
+        </div>
+        <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
+          <OpacityControls
+            onChange={(opacity) => updateOpacity(opacity)}
+            defaultValue={opacity}
+          />
+        </div>
+        <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
+          <ColorControls onChange={(color) => updateGridColor(color)} />
+        </div>
       </div>
       <ColumnHeaders />
       {breakpoints &&

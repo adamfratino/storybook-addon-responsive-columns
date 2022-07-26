@@ -15,7 +15,12 @@ const createResponsiveStyles = (array: GridProps[]) => {
   return stylesString;
 };
 
-const Grid: React.FC<ColumnsProps> = ({ active, breakpoints, gridColor }) => {
+const Grid: React.FC<ColumnsProps> = ({
+  active,
+  breakpoints,
+  gridColor,
+  opacity,
+}) => {
   const breakpointsArray = breakpoints.map(({ breakpoint }) => breakpoint);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -36,6 +41,7 @@ const Grid: React.FC<ColumnsProps> = ({ active, breakpoints, gridColor }) => {
   return (
     <Columns
       gridColor={gridColor}
+      opacity={opacity}
       active={active}
       responsiveStyles={createResponsiveStyles(breakpoints)}
     >
@@ -57,7 +63,7 @@ const Columns = styled.aside<StyledProps>`
   position: absolute;
   inset: 0;
   margin: 0 auto;
-  opacity: 0.3;
+  opacity: ${({ opacity }) => +opacity / 100};
   pointer-events: none;
   height: 100vh;
   ${({ responsiveStyles }) => responsiveStyles};

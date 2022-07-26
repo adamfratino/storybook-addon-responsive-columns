@@ -7,7 +7,7 @@ type ColorControlsProps = {
 };
 
 const ColorControls: React.FC<ColorControlsProps> = ({ onChange }) => (
-  <Container display="flex" alignItems="center" gap="16px" margin="0 0 32px">
+  <Container display="flex" alignItems="center">
     <Label>Color Controls:</Label>
     <ColorControl
       name="gridColor"

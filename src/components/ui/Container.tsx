@@ -12,8 +12,8 @@ type ContainerProps = {
 const Container: React.FC<ContainerProps> = ({
   display = "block",
   gap = 0,
-  padding = "16px",
-  margin = "0",
+  padding = 0,
+  margin = 0,
   alignItems,
   children,
 }) => (

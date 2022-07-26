@@ -10,5 +10,6 @@ export type GridProps = {
 export type ColumnsProps = {
   active: boolean;
   gridColor?: CSSProperties["color"];
+  opacity?: CSSProperties["opacity"];
   breakpoints: GridProps[];
 };
