@@ -1,23 +1,23 @@
 import React from "react";
 import { BooleanControl } from "@storybook/components";
 import { styled } from "@storybook/theming";
-import { useGlobals } from "@storybook/api";
+import { Label } from "./";
 
-const ColumnsToggle: React.FC<{ onChange?: () => void }> = ({ onChange }) => {
-  const [globals] = useGlobals();
-  const { columnsActive } = globals;
-
-  return (
-    <StyledContainer>
-      <StyledLabel>Toggle Columns:</StyledLabel>
-      <BooleanControl
-        name="Toggle Columns"
-        value={columnsActive ? columnsActive : false}
-        onChange={onChange}
-      />
-    </StyledContainer>
-  );
+type ToggleProps = {
+  isActive: boolean;
+  onChange?: () => void;
 };
+
+const ColumnsToggle: React.FC<ToggleProps> = ({ isActive, onChange }) => (
+  <StyledContainer>
+    <Label>Toggle Columns:</Label>
+    <BooleanControl
+      name="Toggle Columns"
+      value={isActive}
+      onChange={onChange}
+    />
+  </StyledContainer>
+);
 
 export default ColumnsToggle;
 
@@ -26,9 +26,4 @@ const StyledContainer = styled.div`
   align-items: center;
   gap: 16px;
   margin-bottom: 32px;
-`;
-
-const StyledLabel = styled.div`
-  font-weight: bold;
-  margin-bottom: 8px;
 `;

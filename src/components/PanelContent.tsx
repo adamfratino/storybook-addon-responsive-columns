@@ -1,42 +1,49 @@
 import React, { useCallback, useEffect } from "react";
-import { useGlobals, useAddonState } from "@storybook/api";
-import { ColumnHeaders, ColumnsToggle, Container, Input } from "./ui";
-import { defaults } from "../defaults";
+import { useAddonState } from "@storybook/api";
 import { ADDON_ID } from "../constants";
+import { defaults } from "../defaults";
+import { ColumnsProps } from "../types";
+import {
+  ColorControls,
+  ColumnHeaders,
+  ColumnsToggle,
+  Container,
+  Input,
+} from "./ui";
 
 export const PanelContent: React.FC = () => {
-  const [{ columnsActive = false }, updateGlobals] = useGlobals();
-  const [currentBreakpoints, setCurrentBreakpoints] = useAddonState(ADDON_ID, [
-    ...defaults.breakpoints,
-  ]);
-
-  useEffect(() => {
-    setCurrentBreakpoints(defaults.breakpoints);
-  }, [columnsActive]);
+  const [state, setState] = useAddonState(ADDON_ID, {
+    ...defaults,
+  });
 
   const toggleColumns = useCallback(() => {
-    updateGlobals({ columnsActive: columnsActive ? undefined : true });
-  }, [columnsActive]);
+    setState({
+      ...state,
+      active: !state.active,
+      gridColor: state.gridColor,
+      breakpoints: state.breakpoints,
+    });
+  }, [state.active]);
 
-  const setBreakpointValue = useCallback(
-    (property: any, value: string, i: number) => {
-      let newBreakpoints = [...currentBreakpoints];
-
-      (newBreakpoints[i] as any)[property] = !(
-        property === "maxWidth" && +value <= 0
-      )
-        ? +value
-        : undefined;
-
-      setCurrentBreakpoints(newBreakpoints);
+  const updateGridColor = useCallback(
+    (gridColor: ColumnsProps["gridColor"]) => {
+      setState({
+        ...state,
+        active: true,
+        gridColor: gridColor,
+        breakpoints: state.breakpoints,
+      });
     },
-    [currentBreakpoints]
+    [state.gridColor]
   );
 
   return (
     <Container padding="32px">
-      <ColumnsToggle onChange={toggleColumns} />
-      <ColumnHeaders />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <ColumnsToggle onChange={toggleColumns} isActive={state.active} />
+        <ColorControls onChange={(color) => updateGridColor(color)} />
+      </div>
+      {/* <ColumnHeaders />
       {defaults.breakpoints.map((breakpoint, i) => (
         <Container
           display="flex"
@@ -64,7 +71,7 @@ export const PanelContent: React.FC = () => {
             onChange={(e) => setBreakpointValue("maxWidth", e.target.value, i)}
           />
         </Container>
-      ))}
+      ))} */}
     </Container>
   );
 };

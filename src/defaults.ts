@@ -1,5 +1,8 @@
-export const defaults = {
-  columnsActive: false,
+import { ColumnsProps } from "./types";
+
+export const defaults: ColumnsProps = {
+  active: false,
+  gridColor: "tomato",
   breakpoints: [
     {
       breakpoint: 0,
