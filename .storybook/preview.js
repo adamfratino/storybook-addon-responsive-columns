@@ -1,3 +1,14 @@
+export const parameters = {
+  layout: "fullscreen",
+  actions: { disable: true },
+  backgrounds: { disable: true },
+  toolbars: { disable: true },
+  previewTabs: {
+    "storybook/docs/panel": {
+      hidden: true,
+    },
+  },
+};
 // export const parameters = {
 //   columns: {
 //     columnsActive: true,
