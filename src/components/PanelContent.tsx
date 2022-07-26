@@ -1,76 +1,146 @@
-import React, { Fragment } from "react";
-import { styled, themes, convert } from "@storybook/theming";
-import { TabsState, Placeholder, Button } from "@storybook/components";
-import { List } from "./List";
-
-export const RequestDataButton = styled(Button)({
-  marginTop: "1rem",
-});
-
-type Results = {
-  danger: any[];
-  warning: any[];
-};
-
-interface PanelContentProps {
-  results: Results;
-  fetchData: () => void;
-  clearData: () => void;
-}
+import React, { useCallback } from "react";
+import { useAddonState } from "@storybook/api";
+import { ADDON_ID } from "../constants";
+import { defaults } from "../defaults";
+import {
+  ColorControls,
+  ColumnHeaders,
+  ColumnsToggle,
+  Container,
+  Input,
+  OpacityControls,
+} from "./ui";
 
 /**
- * Checkout https://github.com/storybookjs/storybook/blob/next/addons/jest/src/components/Panel.tsx
- * for a real world example
- */
-export const PanelContent: React.FC<PanelContentProps> = ({
-  results,
-  fetchData,
-  clearData,
-}) => (
-  <TabsState
-    initial="overview"
-    backgroundColor={convert(themes.normal).background.hoverable}
-  >
-    <div
-      id="overview"
-      title="Overview"
-      color={convert(themes.normal).color.positive}
-    >
-      <Placeholder>
-        <Fragment>
-          Addons can gather details about how a story is rendered. This is panel
-          uses a tab pattern. Click the button below to fetch data for the other
-          two tabs.
-        </Fragment>
-        <Fragment>
-          <RequestDataButton
-            secondary
-            small
-            onClick={fetchData}
-            style={{ marginRight: 16 }}
-          >
-            Request data
-          </RequestDataButton>
+ * our controls panel (the bread & butter)
+ * @todo add inset padding
+ * @todo display viewport width
+ * @todo clean up UI, responsive layout
+ * @todo get dynamic breakpoint values working?
+ *   @todo timebox: 2, otherwise set as a row label
+ *   @todo add option to add/remove breakpoint row
+ * */
+export const PanelContent: React.FC = () => {
+  const [active, setActive] = useAddonState(`${ADDON_ID}_active`, false);
+  const [breakpoints, setBreakpoints] = useAddonState(
+    `${ADDON_ID}_breakpoints`,
+    defaults.breakpoints
+  );
+  const [gridColor, setGridColor] = useAddonState(
+    `${ADDON_ID}_gridColor`,
+    defaults.gridColor
+  );
+  const [opacity, setOpacity] = useAddonState(
+    `${ADDON_ID}_opacity`,
+    defaults.opacity
+  );
 
-          <RequestDataButton outline small onClick={clearData}>
-            Clear data
-          </RequestDataButton>
-        </Fragment>
-      </Placeholder>
-    </div>
-    <div
-      id="danger"
-      title={`${results.danger.length} Danger`}
-      color={convert(themes.normal).color.negative}
-    >
-      <List items={results.danger} />
-    </div>
-    <div
-      id="warning"
-      title={`${results.warning.length} Warning`}
-      color={convert(themes.normal).color.warning}
-    >
-      <List items={results.warning} />
-    </div>
-  </TabsState>
-);
+  const toggleColumns = useCallback(() => setActive(!active), [active]);
+
+  const updateGridColor = useCallback(
+    (gridColor) => setGridColor(gridColor),
+    [gridColor]
+  );
+
+  const updateOpacity = useCallback(
+    (opacity) => {
+      setOpacity(opacity);
+    },
+    [opacity]
+  );
+
+  const setBreakpointValue = useCallback(
+    (property: any, value: string, i: number) => {
+      let newBreakpoints = [...breakpoints];
+      (newBreakpoints[i] as any)[property] = !(
+        property === "maxWidth" && +value <= 0
+      )
+        ? +value
+        : "none";
+      setBreakpoints(newBreakpoints);
+    },
+    [breakpoints]
+  );
+
+  return (
+    <Container padding="32px">
+      <div
+        style={{
+          display: "flex",
+          alignItems: " center",
+          marginBottom: "16px",
+          gap: "32px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flex: 2,
+            marginRight: "auto",
+          }}
+        >
+          <ColumnsToggle onChange={toggleColumns} isActive={active} />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flex: 1,
+            justifyContent: "flex-end",
+          }}
+        >
+          <OpacityControls
+            onChange={(opacity) => updateOpacity(opacity)}
+            defaultValue={opacity}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
+        >
+          <ColorControls onChange={(color) => updateGridColor(color)} />
+        </div>
+      </div>
+      <ColumnHeaders />
+      {breakpoints &&
+        breakpoints.map((breakpoint, i) => (
+          <Container
+            display="flex"
+            gap="16px"
+            padding="4px 0"
+            key={`${breakpoint}_${i}`}
+          >
+            <Input
+              flex="0.5"
+              defaultValue={breakpoints[i].breakpoint}
+              onChange={(e) =>
+                setBreakpointValue("breakpoint", e.target.value, i)
+              }
+            />
+            <Input
+              defaultValue={breakpoints[i].columns}
+              onChange={(e) => setBreakpointValue("columns", e.target.value, i)}
+            />
+            <Input
+              defaultValue={breakpoints[i].gap}
+              onChange={(e) => setBreakpointValue("gap", e.target.value, i)}
+            />
+            <Input
+              defaultValue={breakpoints[i].maxWidth}
+              onChange={(e) =>
+                setBreakpointValue("maxWidth", e.target.value, i)
+              }
+            />
+            <Input
+              defaultValue={breakpoints[i].gutter}
+              onChange={(e) => setBreakpointValue("gutter", e.target.value, i)}
+            />
+          </Container>
+        ))}
+    </Container>
+  );
+};
