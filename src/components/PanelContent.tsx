@@ -13,9 +13,9 @@ import {
 
 /**
  * our controls panel (the bread & butter)
- * @todo clean up UI, responsive layout
  * @todo add inset padding
  * @todo display viewport width
+ * @todo clean up UI, responsive layout
  * @todo get dynamic breakpoint values working?
  *   @todo timebox: 2, otherwise set as a row label
  *   @todo add option to add/remove breakpoint row
@@ -82,13 +82,27 @@ export const PanelContent: React.FC = () => {
         >
           <ColumnsToggle onChange={toggleColumns} isActive={active} />
         </div>
-        <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flex: 1,
+            justifyContent: "flex-end",
+          }}
+        >
           <OpacityControls
             onChange={(opacity) => updateOpacity(opacity)}
             defaultValue={opacity}
           />
         </div>
-        <div style={{ display: "flex", alignItems: "center", flex: 1 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flex: 1,
+            justifyContent: "flex-end",
+          }}
+        >
           <ColorControls onChange={(color) => updateGridColor(color)} />
         </div>
       </div>

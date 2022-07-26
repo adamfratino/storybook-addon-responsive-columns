@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/adamfratino/responsive-columns"
+    "url": "https://github.com/adamfratino/storybook-addon-responsive-columns"
   },
   "author": "Adam Fratino <hello@fratino.dev>",
   "license": "MIT",
