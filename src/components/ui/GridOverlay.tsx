@@ -1,12 +1,11 @@
-import React, { useEffect, useState, CSSProperties } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@storybook/theming";
-import { defaults } from "../../defaults";
 import { GridProps, ColumnsProps } from "../../types";
 
 const createResponsiveStyles = (array: GridProps[]) => {
   let stylesString = "";
   array.map((bp) => {
-    const { breakpoint, gap, maxWidth, columns } = bp;
+    const { breakpoint, gap, maxWidth } = bp;
     stylesString += `
       @media (min-width:${breakpoint}px) {
         gap: ${gap}px;
@@ -16,18 +15,13 @@ const createResponsiveStyles = (array: GridProps[]) => {
   return stylesString;
 };
 
-const Grid: React.FC<ColumnsProps> = ({
-  active = false,
-  breakpoints = defaults.breakpoints,
-  gridColor,
-}) => {
+const Grid: React.FC<ColumnsProps> = ({ active, breakpoints, gridColor }) => {
   const breakpointsArray = breakpoints.map(({ breakpoint }) => breakpoint);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const checkActiveIndex = () => {
     breakpointsArray.every((bp, i) => {
       if (!window.matchMedia(`(min-width: ${bp}px)`).matches) return false;
-      console.log(bp, i);
       setActiveIndex(i);
       return true;
     });
