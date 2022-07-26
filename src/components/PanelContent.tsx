@@ -11,6 +11,15 @@ import {
   OpacityControls,
 } from "./ui";
 
+/**
+ * our controls panel (the bread & butter)
+ * @todo clean up UI, responsive layout
+ * @todo add inset padding
+ * @todo display viewport width
+ * @todo get dynamic breakpoint values working?
+ *   @todo timebox: 2, otherwise set as a row label
+ *   @todo add option to add/remove breakpoint row
+ * */
 export const PanelContent: React.FC = () => {
   const [active, setActive] = useAddonState(`${ADDON_ID}_active`, false);
   const [breakpoints, setBreakpoints] = useAddonState(
