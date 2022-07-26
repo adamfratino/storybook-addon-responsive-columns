@@ -1,17 +1,21 @@
 import React from "react";
 import { ColorControl } from "@storybook/components";
+import { Container, Label } from "./";
 
 type ColorControlsProps = {
   onChange?: (e: any) => void;
 };
 
 const ColorControls: React.FC<ColorControlsProps> = ({ onChange }) => (
-  <ColorControl
-    name="gridColor"
-    value="tomato"
-    onChange={onChange}
-    presetColors={presetColors}
-  />
+  <Container display="flex" alignItems="center" gap="16px" margin="0 0 32px">
+    <Label>Color Controls:</Label>
+    <ColorControl
+      name="gridColor"
+      value="tomato"
+      onChange={onChange}
+      presetColors={presetColors}
+    />
+  </Container>
 );
 
 export default ColorControls;

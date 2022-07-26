@@ -1,11 +1,17 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { styled } from "@storybook/theming";
 
-const Label: React.FC = ({ children }) => <StyledLabel>{children}</StyledLabel>;
+type LabelProps = {
+  margin?: CSSProperties["margin"];
+};
+
+const Label: React.FC<LabelProps> = ({ margin, children }) => (
+  <StyledLabel margin={margin}>{children}</StyledLabel>
+);
 
 export default Label;
 
-const StyledLabel = styled.div`
+const StyledLabel = styled.div<LabelProps>`
   font-weight: bold;
-  margin-bottom: 8px;
+  ${({ margin }) => `margin: ${margin}`};
 `;
