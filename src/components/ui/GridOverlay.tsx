@@ -10,7 +10,7 @@ const createResponsiveStyles = (array: GridProps[]) => {
       @media (min-width:${breakpoint}px) {
         gap: ${gap}px;
         max-width: ${maxWidth ? `${maxWidth}px` : "none"};
-        padding-inline: ${gutter}px;
+        padding-inline: ${gutter || 0}px;
       }`;
   });
   return stylesString;
