@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useAddonState } from "@storybook/api";
 import { ADDON_ID } from "../constants";
 import { defaults } from "../defaults";
@@ -99,7 +99,6 @@ export const PanelContent: React.FC = () => {
           style={{
             display: "flex",
             alignItems: "center",
-            flex: 1,
             justifyContent: "flex-end",
           }}
         >
@@ -135,6 +134,10 @@ export const PanelContent: React.FC = () => {
               onChange={(e) =>
                 setBreakpointValue("maxWidth", e.target.value, i)
               }
+            />
+            <Input
+              defaultValue={breakpoints[i].gutter}
+              onChange={(e) => setBreakpointValue("gutter", e.target.value, i)}
             />
           </Container>
         ))}

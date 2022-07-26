@@ -5,11 +5,12 @@ import { GridProps, ColumnsProps } from "../../types";
 const createResponsiveStyles = (array: GridProps[]) => {
   let stylesString = "";
   array.map((bp) => {
-    const { breakpoint, gap, maxWidth } = bp;
+    const { breakpoint, gap, maxWidth, gutter } = bp;
     stylesString += `
       @media (min-width:${breakpoint}px) {
         gap: ${gap}px;
         max-width: ${maxWidth ? `${maxWidth}px` : "none"};
+        padding-inline: ${gutter}px;
       }`;
   });
   return stylesString;
@@ -62,6 +63,7 @@ type StyledProps = Omit<ColumnsProps, "breakpoints"> & {
   responsiveStyles?: string;
 };
 
+/** @todo make non-column background color dynamic */
 const Columns = styled.aside<StyledProps>`
   display: ${({ active }) => (active ? "flex" : "none")};
   position: absolute;
@@ -69,6 +71,7 @@ const Columns = styled.aside<StyledProps>`
   margin: 0 auto;
   opacity: ${({ opacity }) => +opacity / 100};
   pointer-events: none;
+  background-color: cyan;
   height: 100vh;
   ${({ responsiveStyles }) => responsiveStyles};
 

@@ -4,6 +4,7 @@ export type GridProps = {
   breakpoint: number;
   columns: number;
   gap: CSSProperties["gap"];
+  gutter?: number;
   maxWidth?: CSSProperties["maxWidth"];
 };
 

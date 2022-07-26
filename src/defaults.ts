@@ -9,11 +9,13 @@ export const defaults: ColumnsProps = {
       breakpoint: 0,
       columns: 4,
       gap: 4,
+      gutter: 16,
     },
     {
       breakpoint: 768,
       columns: 6,
       gap: 8,
+      gutter: 32,
     },
     {
       breakpoint: 1024,
