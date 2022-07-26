@@ -8,7 +8,7 @@ type ColorControlsProps = {
 
 const ColorControls: React.FC<ColorControlsProps> = ({ onChange }) => (
   <Container display="flex" alignItems="center">
-    <Label>Color Controls:</Label>
+    <Label>Set Color:</Label>
     <ColorControl
       name="gridColor"
       value="tomato"

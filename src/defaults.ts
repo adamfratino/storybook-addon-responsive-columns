@@ -3,7 +3,7 @@ import { ColumnsProps } from "./types";
 export const defaults: ColumnsProps = {
   active: false,
   gridColor: "tomato",
-  opacity: 50,
+  opacity: 30,
   breakpoints: [
     {
       breakpoint: 0,

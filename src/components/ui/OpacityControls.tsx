@@ -15,7 +15,7 @@ const OpacityControls: React.FC<OpacityControlsProps> = ({
 
   return (
     <Container display="flex" alignItems="center" gap="16px">
-      <Label>Color Controls:</Label>
+      <Label>Set Opacity:</Label>
       <RangeControl
         name="opacity"
         onChange={(e) => {
@@ -26,7 +26,7 @@ const OpacityControls: React.FC<OpacityControlsProps> = ({
         defaultValue={defaultValue}
         min={0}
         max={100}
-        step={20}
+        step={10}
       />
     </Container>
   );
