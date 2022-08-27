@@ -27,11 +27,11 @@ module.exports = {
 | Property    | Default                                                                                                                                                | Type     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
 | active      | false                                                                                                                                                  | boolean  |
-| gridColor   | string                                                                                                                                                 | "tomato" |
-| opacity     | number                                                                                                                                                 | 30       |
-| breakpoints | _[see here](https://github.com/adamfratino/storybook-addon-responsive-columns/blob/099dc1bdce931662e77f7ebed53575b48bbf0e45/src/preset/preview.ts#L9)_ | object   |
+| gridColor   | tomato                                                                                                                                                 | string   |
+| opacity     | 30                                                                                                                                                     | number   |
+| breakpoints | _[see here](https://github.com/adamfratino/storybook-addon-responsive-columns/blob/099dc1bdce931662e77f7ebed53575b48bbf0e45/src/preset/preview.ts#L9)_ | object[] |
 
-If you'd like to use custom [parameters](https://storybook.js.org/docs/react/writing-stories/parameters), you can do so globally using the `columns` object in `preview.js`.
+If you'd like to use custom [parameters](https://storybook.js.org/docs/react/writing-stories/parameters), you can do so globally using the `columns` key in `./storybook/preview.js`:
 
 ```js
 export const parameters = {
@@ -58,6 +58,18 @@ export const parameters = {
         gutter: 24,
       },
     ],
+  },
+};
+```
+
+or locally to a story by adding `columns` to the `parameters` key in your metadata:
+
+```js
+export default {
+  parameters: {
+    columns: {
+      ...
+    },
   },
 };
 ```
