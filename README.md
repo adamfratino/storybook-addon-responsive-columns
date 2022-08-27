@@ -1,93 +1,63 @@
 # Storybook Addon Responsive Columns
 
-A responsive, grid-based columns overlay.
+A responsive, grid-based columns overlay. Define your grids using either global or local parameters, and tweak your grid properties using `Columns` controls panel.
 
-### Development scripts
+View an [interactive demo](https://storybook-addon-responsive-columns.netlify.app/?path=/story/playground--iframe-test).
 
-- `yarn start` runs babel in watch mode and starts Storybook
-- `yarn build` build and package your addon code
+![example screenshot](https://github.com/adamfratino/storybook-addon-responsive-columns/blob/main/screenshot.png?raw=true)
 
-### Switch from TypeScript to JavaScript
+## Installation
 
-Don't want to use TypeScript? We offer a handy eject command: `yarn eject-ts`
-
-This will convert all code to JS. It is a destructive process, so we recommended running this before you start writing any code.
-
-## What's included?
-
-![Demo](https://user-images.githubusercontent.com/42671/107857205-e7044380-6dfa-11eb-8718-ad02e3ba1a3f.gif)
-
-The addon code lives in `src`. It demonstrates all core addon related concepts. The three [UI paradigms](https://storybook.js.org/docs/react/addons/addon-types#ui-based-addons)
-
-- `src/Tool.js`
-- `src/Panel.js`
-- `src/Tab.js`
-
-Which, along with the addon itself, are registered in `src/preset/manager.js`.
-
-Managing State and interacting with a story:
-
-- `src/withColumns.js` & `src/Tool.js` demonstrates how to use `useGlobals` to manage global state and modify the contents of a Story.
-- `src/withRoundTrip.js` & `src/Panel.js` demonstrates two-way communication using channels.
-- `src/Tab.js` demonstrates how to use `useParameter` to access the current story's parameters.
-
-Your addon might use one or more of these patterns. Feel free to delete unused code. Update `src/preset/manager.js` and `src/preset/preview.js` accordingly.
-
-Lastly, configure you addon name in `src/constants.js`.
-
-### Metadata
-
-Storybook addons are listed in the [catalog](https://storybook.js.org/addons) and distributed via npm. The catalog is populated by querying npm's registry for Storybook-specific metadata in `package.json`. This project has been configured with sample data. Learn more about available options in the [Addon metadata docs](https://storybook.js.org/docs/react/addons/addon-catalog#addon-metadata).
-
-## Release Management
-
-### Setup
-
-This project is configured to use [auto](https://github.com/intuit/auto) for release management. It generates a changelog and pushes it to both GitHub and npm. Therefore, you need to configure access to both:
-
-- [`NPM_TOKEN`](https://docs.npmjs.com/creating-and-viewing-access-tokens#creating-access-tokens) Create a token with both _Read and Publish_ permissions.
-- [`GH_TOKEN`](https://github.com/settings/tokens) Create a token with the `repo` scope.
-
-Then open your `package.json` and edit the following fields:
-
-- `name`
-- `author`
-- `repository`
-
-#### Local
-
-To use `auto` locally create a `.env` file at the root of your project and add your tokens to it:
-
-```bash
-GH_TOKEN=<value you just got from GitHub>
-NPM_TOKEN=<value you just got from npm>
+```
+yarn add -D @storybook/addon-responsive-columns
 ```
 
-Lastly, **create labels on GitHub**. You’ll use these labels in the future when making changes to the package.
+within `.storybook/main.js:`
 
-```bash
-npx auto create-labels
+```
+module.exports = {
+  addons: ['@storybook/addon-responsive-columns'],
+};
 ```
 
-If you check on GitHub, you’ll now see a set of labels that `auto` would like you to use. Use these to tag future pull requests.
+## Usage
 
-#### GitHub Actions
+`@storybook/addon-responsive-columns` comes with some defaults to get your started.
 
-This template comes with GitHub actions already set up to publish your addon anytime someone pushes to your repository.
+| Property    | Default                                                                                                                                                | Type     |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
+| active      | false                                                                                                                                                  | boolean  |
+| gridColor   | string                                                                                                                                                 | "tomato" |
+| opacity     | number                                                                                                                                                 | 30       |
+| breakpoints | _[see here](https://github.com/adamfratino/storybook-addon-responsive-columns/blob/099dc1bdce931662e77f7ebed53575b48bbf0e45/src/preset/preview.ts#L9)_ | object   |
 
-Go to `Settings > Secrets`, click `New repository secret`, and add your `NPM_TOKEN`.
+If you'd like to use custom [parameters](https://storybook.js.org/docs/react/writing-stories/parameters), you can do so globally using the `columns` object in `preview.js`.
 
-### Creating a release
-
-To create a release locally you can run the following command, otherwise the GitHub action will make the release for you.
-
-```sh
-yarn release
+```js
+export const parameters = {
+  columns: {
+    active: true,
+    gridColor: "salmon",
+    opacity: 30,
+    breakpoints: [
+      {
+        breakpoint: 0,
+        columns: 4,
+        gap: 8,
+      },
+      {
+        breakpoint: 768,
+        columns: 8,
+        gap: 16,
+      },
+      {
+        breakpoint: 1024,
+        columns: 12,
+        gap: 16,
+        maxWidth: 1224,
+        gutter: 24,
+      },
+    ],
+  },
+};
 ```
-
-That will:
-
-- Build and package the addon code
-- Bump the version
-- Push a release to GitHub and npm
-- Push a changelog to GitHub
