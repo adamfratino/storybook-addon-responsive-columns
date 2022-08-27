@@ -22,7 +22,7 @@ module.exports = {
 
 ## Usage
 
-`storybook-addon-responsive-columns` comes with some defaults to get your started.
+`storybook-addon-responsive-columns` comes with some defaults to get you started.
 
 | Property    | Default                                                                                                                                                | Type     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
@@ -62,7 +62,7 @@ export const parameters = {
 };
 ```
 
-or locally to a story by adding `columns` to the `parameters` key in your metadata:
+or locally by adding `columns` to the `parameters` key in your story's metadata:
 
 ```js
 export default {
