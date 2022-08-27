@@ -5,8 +5,8 @@ export const parameters = {
   toolbars: { disable: true },
   previewTabs: { "storybook/docs/panel": { hidden: true } },
   columns: {
-    active: false,
-    gridColor: "teal",
+    active: true,
+    gridColor: "tomato",
     opacity: 50,
     breakpoints: [
       {
@@ -23,6 +23,8 @@ export const parameters = {
         breakpoint: 1024,
         columns: 12,
         gap: 16,
+        maxWidth: 1224,
+        gutter: 24,
       },
     ],
   },
