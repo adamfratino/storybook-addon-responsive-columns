@@ -1,3 +1,15 @@
+# v1.0.10 (Sat Aug 27 2022)
+
+#### ⚠️ Pushed to `main`
+
+- Update README.md ([@adamfratino](https://github.com/adamfratino))
+
+#### Authors: 1
+
+- Adam Fratino ([@adamfratino](https://github.com/adamfratino))
+
+---
+
 # v1.0.9 (Sat Aug 27 2022)
 
 #### 🐛 Bug Fix
