@@ -10,7 +10,8 @@
     "layout",
     "design",
     "addon",
-    "storybook"
+    "storybook",
+    "storybook-addons"
   ],
   "repository": {
     "type": "git",
