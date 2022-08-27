@@ -1,3 +1,15 @@
+# v1.0.9 (Sat Aug 27 2022)
+
+#### 🐛 Bug Fix
+
+- update screenshot to remove bunk name [#4](https://github.com/adamfratino/storybook-addon-responsive-columns/pull/4) ([@adamfratino](https://github.com/adamfratino))
+
+#### Authors: 1
+
+- Adam Fratino ([@adamfratino](https://github.com/adamfratino))
+
+---
+
 # v1.0.6 (Sat Aug 27 2022)
 
 #### 🐛 Bug Fix
