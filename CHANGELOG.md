@@ -1,3 +1,15 @@
+# v1.0.11 (Sat Aug 27 2022)
+
+#### ⚠️ Pushed to `main`
+
+- add storybook-addons to package keywords ([@adamfratino](https://github.com/adamfratino))
+
+#### Authors: 1
+
+- Adam Fratino ([@adamfratino](https://github.com/adamfratino))
+
+---
+
 # v1.0.10 (Sat Aug 27 2022)
 
 #### ⚠️ Pushed to `main`
