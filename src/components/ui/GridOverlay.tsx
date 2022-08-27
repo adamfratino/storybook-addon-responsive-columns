@@ -16,10 +16,7 @@ const createResponsiveStyles = (array: GridProps[]) => {
   return stylesString;
 };
 
-/**
- * Cceates the grid UI
- * @todo fix flash of unstyled content (probably `checkActiveIndex`)
- * */
+/** Creates the grid UI */
 const Grid: React.FC<ColumnsProps> = ({
   active,
   breakpoints,
