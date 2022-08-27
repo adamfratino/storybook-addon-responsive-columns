@@ -98,6 +98,6 @@
       "preact",
       "react-native"
     ],
-    "icon": "https://github.com/adamfratino/storybook-addon-responsive-columns/blob/main/icon.png?raw=true"
+    "icon": "https://raw.githubusercontent.com/adamfratino/storybook-addon-responsive-columns/main/icon.png"
   }
 }
