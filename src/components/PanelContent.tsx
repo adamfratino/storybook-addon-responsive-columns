@@ -152,8 +152,8 @@ const FlexAlignCenter = styled.div`
 
 const BreakpointValue = styled.p`
   flex: 0.15;
+  align-self: center;
   font-weight: bold;
   text-align: right;
   margin: 0;
-  align-self: center;
 `;
