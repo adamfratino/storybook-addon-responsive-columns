@@ -1,6 +1,6 @@
 {
   "name": "storybook-addon-responsive-columns",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A responsive, grid-based columns overlay.",
   "author": "Adam Fratino <hello@fratino.dev>",
   "keywords": [
