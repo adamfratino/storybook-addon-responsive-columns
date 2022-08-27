@@ -1,3 +1,16 @@
+# v1.0.5 (Sat Aug 27 2022)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of https://github.com/adamfratino/responsive-columns ([@adamfratino](https://github.com/adamfratino))
+- update demo link to be more generic ([@adamfratino](https://github.com/adamfratino))
+
+#### Authors: 1
+
+- Adam Fratino ([@adamfratino](https://github.com/adamfratino))
+
+---
+
 # v1.0.4 (Sat Aug 27 2022)
 
 #### ⚠️ Pushed to `main`
