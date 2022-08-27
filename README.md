@@ -9,20 +9,20 @@ View an [interactive demo](https://storybook-addon-responsive-columns.netlify.ap
 ## Installation
 
 ```
-yarn add -D @storybook/addon-responsive-columns
+yarn add -D storybook-addon-responsive-columns
 ```
 
 within `.storybook/main.js:`
 
 ```
 module.exports = {
-  addons: ['@storybook/addon-responsive-columns'],
+  addons: ['storybook-addon-responsive-columns'],
 };
 ```
 
 ## Usage
 
-`@storybook/addon-responsive-columns` comes with some defaults to get your started.
+`storybook-addon-responsive-columns` comes with some defaults to get your started.
 
 | Property    | Default                                                                                                                                                | Type     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
