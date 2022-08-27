@@ -1,3 +1,15 @@
+# v1.0.6 (Sat Aug 27 2022)
+
+#### 🐛 Bug Fix
+
+- add CODEOWNERS [#3](https://github.com/adamfratino/storybook-addon-responsive-columns/pull/3) ([@adamfratino](https://github.com/adamfratino))
+
+#### Authors: 1
+
+- Adam Fratino ([@adamfratino](https://github.com/adamfratino))
+
+---
+
 # v1.0.5 (Sat Aug 27 2022)
 
 #### ⚠️ Pushed to `main`
