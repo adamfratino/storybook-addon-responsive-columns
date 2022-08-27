@@ -3,7 +3,9 @@ import { styled } from "@storybook/theming";
 
 export default {
   title: "Playground",
-  args: {},
+  args: {
+    url: "https://codepen.io/adamfratino/full/LYdKpym",
+  },
   argTypes: {
     url: { name: "url" },
   },
@@ -56,6 +58,4 @@ const NoIFrameMessage = () => (
 );
 
 export const iframeTest = Template.bind({});
-iframeTest.args = {
-  url: "",
-};
+iframeTest.args = {};
