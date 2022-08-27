@@ -2,7 +2,7 @@
 
 A responsive, grid-based columns overlay. Define your grids using either global or local parameters, and tweak your grid properties using `Columns` controls panel.
 
-View an [interactive demo](https://storybook-addon-responsive-columns.netlify.app/?path=/story/playground--iframe-test).
+View an [interactive demo](https://storybook-addon-responsive-columns.netlify.app/).
 
 ![example screenshot](https://github.com/adamfratino/storybook-addon-responsive-columns/blob/main/screenshot.png?raw=true)
 
