@@ -57,5 +57,5 @@ const NoIFrameMessage = () => (
   </NoIFrameContainer>
 );
 
-export const iframeTest = Template.bind({});
-iframeTest.args = {};
+export const Demo = Template.bind({});
+Demo.args = {};
