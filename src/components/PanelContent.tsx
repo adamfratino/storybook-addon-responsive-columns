@@ -99,12 +99,13 @@ export const PanelContent: React.FC = () => {
                 padding="4px 0"
                 key={`${breakpoint}_${i}`}
               >
-                <Input
+                {/* <Input
                   defaultValue={breakpoint.breakpoint}
                   onChange={(e) =>
                     setBreakpointValue("breakpoint", e.target.value, i)
                   }
-                />
+                /> */}
+                <BreakpointValue>{breakpoint.breakpoint}:</BreakpointValue>
                 <Input
                   defaultValue={breakpoint.columns}
                   onChange={(e) =>
@@ -147,4 +148,12 @@ const Row = styled.div`
 const FlexAlignCenter = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const BreakpointValue = styled.p`
+  flex: 0.15;
+  font-weight: bold;
+  text-align: right;
+  margin: 0;
+  align-self: center;
 `;
