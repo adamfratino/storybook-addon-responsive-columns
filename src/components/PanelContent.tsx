@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { styled } from "@storybook/theming";
 import { useAddonState, useParameter } from "@storybook/api";
+import React, { useCallback, useEffect } from "react";
 import { ADDON_ID, PARAM_KEY } from "../constants";
 import { ColumnsProps, GridProps } from "../types";
 import {
@@ -14,7 +15,6 @@ import {
 /**
  * our controls panel (the bread & butter)
  * @todo display viewport width
- * @todo clean up UI, responsive layout
  * */
 export const PanelContent: React.FC = () => {
   const parameters: ColumnsProps = useParameter(PARAM_KEY);
@@ -70,53 +70,26 @@ export const PanelContent: React.FC = () => {
     <>
       {isLoaded ? (
         <Container padding="32px">
-          <div
-            style={{
-              display: "flex",
-              alignItems: " center",
-              marginBottom: "16px",
-              gap: "32px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flex: 2,
-                marginRight: "auto",
-              }}
-            >
+          <Row>
+            <FlexAlignCenter style={{ flex: 2, marginRight: "auto" }}>
               <ColumnsToggle
                 onChange={toggleColumns}
                 isActive={active as boolean}
               />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flex: 1,
-                justifyContent: "flex-end",
-              }}
-            >
+            </FlexAlignCenter>
+            <FlexAlignCenter style={{ flex: 1, justifyContent: "flex-end" }}>
               <OpacityControls
                 onChange={(opacity) => updateOpacity(opacity)}
                 defaultValue={opacity}
               />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-              }}
-            >
+            </FlexAlignCenter>
+            <FlexAlignCenter style={{ justifyContent: "flex-end" }}>
               <ColorControls
                 defaultColor={gridColor as string}
                 onChange={(color) => updateGridColor(color)}
               />
-            </div>
-          </div>
+            </FlexAlignCenter>
+          </Row>
           <ColumnHeaders />
           {breakpoints &&
             (breakpoints as GridProps[]).map((breakpoint, i) => (
@@ -127,7 +100,6 @@ export const PanelContent: React.FC = () => {
                 key={`${breakpoint}_${i}`}
               >
                 <Input
-                  flex="0.5"
                   defaultValue={breakpoint.breakpoint}
                   onChange={(e) =>
                     setBreakpointValue("breakpoint", e.target.value, i)
@@ -164,3 +136,15 @@ export const PanelContent: React.FC = () => {
     </>
   );
 };
+
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 32px;
+`;
+
+const FlexAlignCenter = styled.div`
+  display: flex;
+  align-items: center;
+`;

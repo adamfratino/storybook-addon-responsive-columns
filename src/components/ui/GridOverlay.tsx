@@ -76,4 +76,10 @@ const Columns = styled.aside<StyledProps>`
     flex: 1;
     background-color: ${({ gridColor }) => gridColor};
   }
+
+  // we don't want addon-outline to outline the grid
+  &&&,
+  &&& * {
+    outline: none !important;
+  }
 `;
