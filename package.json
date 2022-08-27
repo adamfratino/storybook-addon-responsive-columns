@@ -1,18 +1,20 @@
 {
-  "name": "storybook-addon-columns",
+  "name": "storybook-addon-responsive-columns",
   "version": "0.0.0",
   "description": "A responsive, grid-based columns overlay.",
+  "author": "Adam Fratino <hello@fratino.dev>",
   "keywords": [
     "columns",
     "grid",
+    "guides",
     "layout",
+    "design",
     "storybook-addons"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/adamfratino/storybook-addon-responsive-columns"
   },
-  "author": "Adam Fratino <hello@fratino.dev>",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
