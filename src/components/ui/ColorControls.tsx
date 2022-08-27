@@ -3,15 +3,20 @@ import { ColorControl } from "@storybook/components";
 import { Container, Label } from "./";
 
 type ColorControlsProps = {
+  defaultColor?: string;
   onChange?: (e: any) => void;
 };
 
-const ColorControls: React.FC<ColorControlsProps> = ({ onChange }) => (
+const ColorControls: React.FC<ColorControlsProps> = ({
+  defaultColor,
+  onChange,
+}) => (
   <Container display="flex" alignItems="center" gap="16px">
     <Label>Set Color:</Label>
     <ColorControl
       name="gridColor"
-      value="tomato"
+      defaultValue={defaultColor}
+      value={defaultColor}
       onChange={onChange}
       presetColors={presetColors}
     />

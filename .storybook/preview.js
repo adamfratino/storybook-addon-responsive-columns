@@ -3,26 +3,27 @@ export const parameters = {
   actions: { disable: true },
   backgrounds: { disable: true },
   toolbars: { disable: true },
-  previewTabs: {
-    "storybook/docs/panel": {
-      hidden: true,
-    },
+  previewTabs: { "storybook/docs/panel": { hidden: true } },
+  columns: {
+    active: false,
+    gridColor: "teal",
+    opacity: 50,
+    breakpoints: [
+      {
+        breakpoint: 0,
+        columns: 4,
+        gap: 8,
+      },
+      {
+        breakpoint: 768,
+        columns: 8,
+        gap: 16,
+      },
+      {
+        breakpoint: 1024,
+        columns: 12,
+        gap: 16,
+      },
+    ],
   },
 };
-// export const parameters = {
-//   columns: {
-//     columnsActive: true,
-//     breakpoints: [
-//       {
-//         breakpoint: 0,
-//         columns: 2,
-//         gap: 4,
-//       },
-//       {
-//         breakpoint: 768,
-//         columns: 9,
-//         gap: 8,
-//       },
-//     ],
-//   },
-// };

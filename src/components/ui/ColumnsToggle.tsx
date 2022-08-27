@@ -12,6 +12,7 @@ const ColumnsToggle: React.FC<ToggleProps> = ({ isActive, onChange }) => (
     <Label>Toggle Columns:</Label>
     <BooleanControl
       name="Toggle Columns"
+      defaultValue={isActive}
       value={isActive}
       onChange={onChange}
     />

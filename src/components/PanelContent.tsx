@@ -1,7 +1,7 @@
-import React, { useCallback } from "react";
-import { useAddonState } from "@storybook/api";
-import { ADDON_ID } from "../constants";
-import { defaults } from "../defaults";
+import React, { useCallback, useEffect, useState } from "react";
+import { useAddonState, useParameter } from "@storybook/api";
+import { ADDON_ID, PARAM_KEY } from "../constants";
+import { ColumnsProps } from "../types";
 import {
   ColorControls,
   ColumnHeaders,
@@ -13,7 +13,6 @@ import {
 
 /**
  * our controls panel (the bread & butter)
- * @todo add inset padding
  * @todo display viewport width
  * @todo clean up UI, responsive layout
  * @todo get dynamic breakpoint values working?
@@ -21,21 +20,19 @@ import {
  *   @todo add option to add/remove breakpoint row
  * */
 export const PanelContent: React.FC = () => {
-  const [active, setActive] = useAddonState(`${ADDON_ID}_active`, false);
+  const parameters: ColumnsProps = useParameter(PARAM_KEY);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [active, setActive] = useAddonState(`${ADDON_ID}_active`);
+  const [gridColor, setGridColor] = useAddonState(`${ADDON_ID}_gridColor`);
+  const [opacity, setOpacity] = useAddonState(`${ADDON_ID}_opacity`);
   const [breakpoints, setBreakpoints] = useAddonState(
     `${ADDON_ID}_breakpoints`,
-    defaults.breakpoints
-  );
-  const [gridColor, setGridColor] = useAddonState(
-    `${ADDON_ID}_gridColor`,
-    defaults.gridColor
-  );
-  const [opacity, setOpacity] = useAddonState(
-    `${ADDON_ID}_opacity`,
-    defaults.opacity
+    []
   );
 
-  const toggleColumns = useCallback(() => setActive(!active), [active]);
+  const toggleColumns = useCallback(() => {
+    setActive(!active);
+  }, [active]);
 
   const updateGridColor = useCallback(
     (gridColor) => setGridColor(gridColor),
@@ -43,9 +40,7 @@ export const PanelContent: React.FC = () => {
   );
 
   const updateOpacity = useCallback(
-    (opacity) => {
-      setOpacity(opacity);
-    },
+    (opacity) => setOpacity(opacity),
     [opacity]
   );
 
@@ -61,6 +56,20 @@ export const PanelContent: React.FC = () => {
     },
     [breakpoints]
   );
+
+  useEffect(() => {
+    if (parameters) {
+      const { active, gridColor, opacity, breakpoints } = parameters;
+      const getParameters = async () => {
+        await setBreakpoints(breakpoints);
+        await setGridColor(gridColor);
+        await setOpacity(opacity);
+        return await setActive(active);
+      };
+
+      getParameters().then((data) => setIsLoaded(true));
+    }
+  }, [parameters]);
 
   return (
     <Container padding="32px">
@@ -80,7 +89,10 @@ export const PanelContent: React.FC = () => {
             marginRight: "auto",
           }}
         >
-          <ColumnsToggle onChange={toggleColumns} isActive={active} />
+          <ColumnsToggle
+            onChange={toggleColumns}
+            isActive={active as boolean}
+          />
         </div>
         <div
           style={{
@@ -102,7 +114,10 @@ export const PanelContent: React.FC = () => {
             justifyContent: "flex-end",
           }}
         >
-          <ColorControls onChange={(color) => updateGridColor(color)} />
+          <ColorControls
+            defaultColor={gridColor as string}
+            onChange={(color) => updateGridColor(color)}
+          />
         </div>
       </div>
       <ColumnHeaders />
