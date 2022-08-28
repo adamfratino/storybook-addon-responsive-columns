@@ -4,7 +4,7 @@ import { styled } from "@storybook/theming";
 export default {
   title: "Playground",
   args: {
-    url: "https://codepen.io/adamfratino/full/LYdKpym",
+    url: "https://fratino.dev/columns",
   },
   argTypes: {
     url: { name: "url" },
