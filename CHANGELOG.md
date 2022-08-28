@@ -1,3 +1,15 @@
+# v1.0.14 (Sun Aug 28 2022)
+
+#### ⚠️ Pushed to `main`
+
+- remove badges, i dont like them anymore ([@adamfratino](https://github.com/adamfratino))
+
+#### Authors: 1
+
+- Adam Fratino ([@adamfratino](https://github.com/adamfratino))
+
+---
+
 # v1.0.13 (Sat Aug 27 2022)
 
 #### ⚠️ Pushed to `main`
