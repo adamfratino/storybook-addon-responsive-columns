@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { RangeControl } from "@storybook/components";
 import { Container, Label } from "./";
+import { RangeControl } from "@storybook/blocks";
 
 type OpacityControlsProps = {
   defaultValue?: any;

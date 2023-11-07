@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { DecoratorFunction, useEffect } from "@storybook/addons";
+import React, { useEffect, useState } from "react";
 import { useAddonState } from "@storybook/client-api";
 import { GridOverlay } from "./components/ui";
 import { ADDON_ID } from "./constants";
