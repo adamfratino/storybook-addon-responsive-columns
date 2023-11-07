@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import { DecoratorFunction, useEffect } from "@storybook/addons";
+import React, { useEffect, useState } from "react";
 import { useAddonState } from "@storybook/client-api";
 import { GridOverlay } from "./components/ui";
 import { ADDON_ID } from "./constants";
 import { ColumnsProps, GridProps } from "./types";
+import type {
+  Renderer,
+  PartialStoryFn as StoryFunction,
+  StoryContext,
+} from "@storybook/types";
 
-export const withColumns: DecoratorFunction = (StoryFn, context) => {
+export const withColumns = (
+  StoryFn: StoryFunction<Renderer>,
+  context: StoryContext<Renderer>
+) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [active] = useAddonState(`${ADDON_ID}_active`);
   const [breakpoints] = useAddonState(`${ADDON_ID}_breakpoints`);

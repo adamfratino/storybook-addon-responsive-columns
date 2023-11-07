@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "@storybook/theming";
-import { BooleanControl } from "@storybook/components";
 import { Container, Label } from "./";
+import { BooleanControl } from "@storybook/blocks";
 
 type ToggleProps = {
   isActive: boolean;

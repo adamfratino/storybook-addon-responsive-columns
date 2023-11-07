@@ -31,12 +31,12 @@ export const PanelContent: React.FC = () => {
   }, [active]);
 
   const updateGridColor = useCallback(
-    (gridColor) => setGridColor(gridColor),
+    (gridColor: string) => setGridColor(gridColor),
     [gridColor]
   );
 
   const updateOpacity = useCallback(
-    (opacity) => setOpacity(opacity),
+    (opacity: string) => setOpacity(opacity),
     [opacity]
   );
 

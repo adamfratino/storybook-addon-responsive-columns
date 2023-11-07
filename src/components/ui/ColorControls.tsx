@@ -1,6 +1,6 @@
 import React from "react";
-import { ColorControl } from "@storybook/components";
 import { Container, Label } from "./";
+import { ColorControl } from '@storybook/blocks';
 
 type ColorControlsProps = {
   defaultColor?: string;
