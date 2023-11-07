@@ -2197,6 +2197,14 @@
     "ts-dedent" "^2.0.0"
     "util-deprecate" "^1.0.2"
 
+"@storybook/client-api@^7.5.3":
+  "integrity" "sha512-5fzH+S6mx3fTIzLgRiubL2/oN+2cg2sGyDqcXj39vovRzzRjJlG8IHj9wD7TRYR0AiUTGrnGklQmrX/NpuTrBQ=="
+  "resolved" "https://registry.npmjs.org/@storybook/client-api/-/client-api-7.5.3.tgz"
+  "version" "7.5.3"
+  dependencies:
+    "@storybook/client-logger" "7.5.3"
+    "@storybook/preview-api" "7.5.3"
+
 "@storybook/client-logger@7.5.3":
   "integrity" "sha512-vUFYALypjix5FoJ5M/XUP6KmyTnQJNW1poHdW7WXUVSg+lBM6E5eAtjTm0hdxNNDH8KSrdy24nCLra5h0X0BWg=="
   "resolved" "https://registry.npmjs.org/@storybook/client-logger/-/client-logger-7.5.3.tgz"
@@ -2394,7 +2402,7 @@
   "resolved" "https://registry.npmjs.org/@storybook/global/-/global-5.0.0.tgz"
   "version" "5.0.0"
 
-"@storybook/manager-api@^7.5.3", "@storybook/manager-api@7.5.3":
+"@storybook/manager-api@7.5.3":
   "integrity" "sha512-d8mVLr/5BEG4bAS2ZeqYTy/aX4jPEpZHdcLaWoB4mAM+PAL9wcWsirUyApKtDVYLITJf/hd8bb2Dm2ok6E45gA=="
   "resolved" "https://registry.npmjs.org/@storybook/manager-api/-/manager-api-7.5.3.tgz"
   "version" "7.5.3"

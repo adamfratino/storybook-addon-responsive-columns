@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAddonState } from "@storybook/manager-api";
+import { useAddonState } from "@storybook/client-api";
 import { GridOverlay } from "./components/ui";
 import { ADDON_ID } from "./constants";
 import { ColumnsProps, GridProps } from "./types";
