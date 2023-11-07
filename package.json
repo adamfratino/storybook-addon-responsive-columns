@@ -52,6 +52,7 @@
     "@babel/preset-typescript": "^7.13.0",
     "@storybook/addon-essentials": "^7.5.3",
     "@storybook/addons": "^7.5.3",
+    "@storybook/api": "^7.5.3",
     "@storybook/blocks": "^7.5.3",
     "@storybook/components": "^7.5.3",
     "@storybook/manager-api": "^7.5.3",
