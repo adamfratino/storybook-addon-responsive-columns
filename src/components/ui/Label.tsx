@@ -3,6 +3,7 @@ import { styled } from "@storybook/theming";
 
 type LabelProps = {
   margin?: CSSProperties["margin"];
+  children: React.ReactNode;
 };
 
 const Label: React.FC<LabelProps> = ({ margin = 0, children }) => (

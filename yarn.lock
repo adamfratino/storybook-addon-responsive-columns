@@ -2028,6 +2028,15 @@
     "memoizerific" "^1.11.3"
     "prop-types" "^15.7.2"
 
+"@storybook/addons@^7.5.3":
+  "integrity" "sha512-1JDndMZ/Pju4YJ4aXegeF0O6BVT19c+Gu7WOlsD0aHbmAsPK5qH9QvcpR04nby6VrVZYtBOEJhGsWtAytzLVZw=="
+  "resolved" "https://registry.npmjs.org/@storybook/addons/-/addons-7.5.3.tgz"
+  "version" "7.5.3"
+  dependencies:
+    "@storybook/manager-api" "7.5.3"
+    "@storybook/preview-api" "7.5.3"
+    "@storybook/types" "7.5.3"
+
 "@storybook/api@^7.5.3":
   "integrity" "sha512-NUW7rxATCaOSkMF/wDz8cseYzYy6rP5CgHaBNVpmfjmObMJVGk3lwxzWk43/jDrK5NC/kLoNDeKgwhSUAx3ZGA=="
   "resolved" "https://registry.npmjs.org/@storybook/api/-/api-7.5.3.tgz"
@@ -2897,6 +2906,11 @@
   "integrity" "sha512-FvUupuM3rlRsRtCN+fDudtmytGO6iHJuuRKS1Ss0pG5z8oX0diNEw94UEL7hgDbpN94rgaK5R7sWm6RrSkZuAQ=="
   "resolved" "https://registry.npmjs.org/@types/unist/-/unist-2.0.3.tgz"
   "version" "2.0.3"
+
+"@types/webpack-env@^1.18.4":
+  "integrity" "sha512-I6e+9+HtWADAWeeJWDFQtdk4EVSAbj6Rtz4q8fJ7mSr1M0jzlFcs8/HZ+Xb5SHzVm1dxH7aUiI+A8kA8Gcrm0A=="
+  "resolved" "https://registry.npmjs.org/@types/webpack-env/-/webpack-env-1.18.4.tgz"
+  "version" "1.18.4"
 
 "@types/yargs-parser@*":
   "integrity" "sha512-37RSHht+gzzgYeobbG+KWryeAW8J33Nhr69cjTqSYymXVZEN9NbRYWoYlRtDhHKPVT1FyNKwaTPC1NynKZpzRA=="
